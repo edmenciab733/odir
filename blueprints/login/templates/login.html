@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Login</title>
+
+  <!-- Bulma is included -->
+ 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('login.static', filename='css/app.css') }}"/>
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+
+
+      <!-- Fonts -->
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- alert sweet alert versión 11.4.20 -->
+    <script src="{{ url_for('static', filename='js/sweetalert2.all.min.js') }}"></script>
+</head>
+<body>
+
+    <div id="app">
+        <section class="section main-section">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  <span class="icon"><i class="mdi mdi-lock"></i></span>
+                  Bienvenido
+                </p>
+              </header>
+              <div class="card-content">
+                <form method="POST" action="/login">
+        
+                  <div class="field spaced">
+                    <label class="label">Usuario</label>
+                    <div class="control icons-left">
+                      <input class="input" type="text" name="email" placeholder="user@example.com" autocomplete="username">
+                      <span class="icon is-small left"><i class="mdi mdi-account"></i></span>
+                    </div>
+                    
+                  </div>
+        
+                  <div class="field spaced">
+                    <label class="label">Password</label>
+                    <p class="control icons-left">
+                      <input class="input" type="password" name="password" placeholder="Password" autocomplete="current-password">
+                      <span class="icon is-small left"><i class="mdi mdi-asterisk"></i></span>
+                    </p>
+                   
+                  </div>
+        
+                 
+        
+                  <hr>
+        
+                  <div class="field grouped">
+                    <div class="control">
+                      <button type="submit" class="button is-fullwidth">
+                        Login
+                      </button>
+                    </div>
+                    
+                  </div>
+        
+                </form>
+              </div>
+            </div>
+        
+          </section>
+        
+    </div>
+    
+    <script src="{{url_for('login.static', filename='js/app.js')}}"></script>
+</body>
+</html>
+

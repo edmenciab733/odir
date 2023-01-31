@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block css_custom%}
+<link rel="stylesheet" href="{{ url_for('home.static', filename='css/app.css') }}"/>
+{% endblock %}
+
+{% block js_custom %}
+<script type="module" src="{{url_for('home.static', filename='js/app.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+ 
+  <div class="card has-table has-mobile-sort-spaced" >
+    
+    
+    <header class="card-header">
+       <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-file"></i></span>
+          Formulario  
+       </p>
+       <button class="card-header-icon" aria-label="more options" v-on:click="obtenerDiagnostico" v-if="!fileShow && isLoading==false">
+        <span class="icon">
+          <i class="mdi mdi-arrow-right" aria-hidden="true"></i>
+        </span>
+      </button>
+       
+       
+    </header>
+    <div class="card-content">
+      <div class="box">
+        <div class="columns">
+          <div class="column is-2">
+                <template>
+                  <section>
+                      <div> 
+                        <b-field  v-if="fileShow">
+                            <b-upload v-model="dropFiles"
+                                multiple
+                                drag-drop  accept="image/*">
+                                <section class="section">
+                                    <div class="content has-text-centered">
+                                        <p>
+                                            <b-icon
+                                                icon="upload"
+                                                size="is-large">
+                                            </b-icon>
+                                        </p>
+                                        <p>Cargar archivos</p>
+                                    </div>
+                                </section>
+                            </b-upload>
+                        </b-field>
+                      </div>
+                      <div class="tags">
+                        <span v-for="(file, index) in dropFiles"
+                            :key="index"
+                            class="tag is-primary" >
+                            [[file.name]]
+                            <button class="delete is-small"
+                                type="button"
+                                @click="deleteDropFile(index)">
+                            </button>
+                        </span>
+                    </div>
+                  </section>
+              </template>
+          </div>
+          <div class="column"  v-if="!fileShow">
+
+                  <figure class="image">
+                    <img :src="image" style="width: 400px; height: 400px; object-fit: cover;">
+                  </figure>
+                
+          
+          </div>
+          <div class="column"  v-if="!fileShow">
+              <p>[[diagnosticoMensaje]]</p>
+              <b-progress v-if="isLoading==true" size="is-small" type="is-success" ></b-progress>
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" v-if="diagnostico.length > 0">
+                <thead>
+                  <tr>
+                    <th>Enfermedad</th>
+                    <th>Probabilidad</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in diagnostico"> 
+                    <th>[[ item.diagnostico ]]</th>
+                    <td>[[ item.probabilidad ]]</td>
+                   
+                  </tr>
+                </tbody>
+              </table>
+
+          </div>
+          
+        </div>
+        
+       
+       
+      </div>
+
+    </div>
+   
+  </div>
+</div>
+{% endblock %}
